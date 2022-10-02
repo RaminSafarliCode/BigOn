@@ -16,17 +16,10 @@ namespace BigOn.WebUI.Models.Entities
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
 
-        public int ColorId { get; set; }
-        public ProductColor ProductColor { get; set; }
 
-        public int SizeId { get; set; }
-        public ProductSize ProductSize { get; set; }
-
-        public int MaterialId { get; set; }
-        public ProductMaterial ProductMaterial { get; set; }
-
-        public int TypeId { get; set; }
-        public ProductType ProductType { get; set; }
+        // Images
+        public ICollection<ProductImages> Images { get; set; }
+        public ICollection<ProductCatalogItem> ProductCatalog { get; set; }
 
     }
 }

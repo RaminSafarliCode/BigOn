@@ -30,6 +30,11 @@ namespace BigOn.WebUI
             {
                 cfg.UseSqlServer(configuration["ConnectionStrings:cString"]);
             });
+
+            services.AddRouting(cfg =>
+            {
+                cfg.LowercaseUrls = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +43,9 @@ namespace BigOn.WebUI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // DataBase Seeding - create environment to upload default data in our database
+            app.SeedData();
 
             app.UseStaticFiles();
 

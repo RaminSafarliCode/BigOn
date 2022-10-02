@@ -6,6 +6,8 @@ namespace BigOn.WebUI.Models.Entities
     public class ProductColor : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<Product> Colors { get; set; }
+        public string Hex { get; set; }
+        public ICollection<ProductCatalogItem> ProductCatalog { get; set; }
+
     }
 }

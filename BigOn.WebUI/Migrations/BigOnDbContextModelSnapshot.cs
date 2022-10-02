@@ -26,10 +26,10 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -47,10 +47,10 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -76,13 +76,13 @@ namespace BigOn.WebUI.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("AnswerDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("AnsweredByUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -102,6 +102,32 @@ namespace BigOn.WebUI.Migrations
                     b.ToTable("ContactPosts");
                 });
 
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.Faq", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Faqs");
+                });
+
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -109,23 +135,17 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -133,33 +153,50 @@ namespace BigOn.WebUI.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductMaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductSizeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductTypeId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductCatalogItem", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductMaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductSizeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("ProductId", "ProductColorId", "ProductMaterialId", "ProductSizeId", "ProductTypeId");
 
                     b.HasIndex("ProductColorId");
 
@@ -169,7 +206,7 @@ namespace BigOn.WebUI.Migrations
 
                     b.HasIndex("ProductTypeId");
 
-                    b.ToTable("Products");
+                    b.ToTable("ProductCatalog");
                 });
 
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductColor", b =>
@@ -179,11 +216,14 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Hex")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -193,6 +233,35 @@ namespace BigOn.WebUI.Migrations
                     b.ToTable("ProductColors");
                 });
 
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductImages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductMaterial", b =>
                 {
                     b.Property<int>("Id")
@@ -200,10 +269,10 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -221,13 +290,17 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SmallName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -242,10 +315,10 @@ namespace BigOn.WebUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("AnswerDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -268,28 +341,47 @@ namespace BigOn.WebUI.Migrations
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.Product", b =>
                 {
                     b.HasOne("BigOn.WebUI.Models.Entities.Brand", "Brand")
-                        .WithMany("Brands")
+                        .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductCatalogItem", b =>
+                {
                     b.HasOne("BigOn.WebUI.Models.Entities.ProductColor", "ProductColor")
-                        .WithMany("Colors")
-                        .HasForeignKey("ProductColorId");
+                        .WithMany("ProductCatalog")
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BigOn.WebUI.Models.Entities.Product", "Product")
+                        .WithMany("ProductCatalog")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BigOn.WebUI.Models.Entities.ProductMaterial", "ProductMaterial")
-                        .WithMany("Materials")
-                        .HasForeignKey("ProductMaterialId");
+                        .WithMany("ProductCatalog")
+                        .HasForeignKey("ProductMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BigOn.WebUI.Models.Entities.ProductSize", "ProductSize")
-                        .WithMany("Sizes")
-                        .HasForeignKey("ProductSizeId");
+                        .WithMany("ProductCatalog")
+                        .HasForeignKey("ProductSizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BigOn.WebUI.Models.Entities.ProductType", "ProductType")
-                        .WithMany("Types")
-                        .HasForeignKey("ProductTypeId");
+                        .WithMany("ProductCatalog")
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Brand");
+                    b.Navigation("Product");
 
                     b.Navigation("ProductColor");
 
@@ -300,9 +392,20 @@ namespace BigOn.WebUI.Migrations
                     b.Navigation("ProductType");
                 });
 
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductImages", b =>
+                {
+                    b.HasOne("BigOn.WebUI.Models.Entities.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.Brand", b =>
                 {
-                    b.Navigation("Brands");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.Category", b =>
@@ -310,24 +413,31 @@ namespace BigOn.WebUI.Migrations
                     b.Navigation("Children");
                 });
 
+            modelBuilder.Entity("BigOn.WebUI.Models.Entities.Product", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("ProductCatalog");
+                });
+
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductColor", b =>
                 {
-                    b.Navigation("Colors");
+                    b.Navigation("ProductCatalog");
                 });
 
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductMaterial", b =>
                 {
-                    b.Navigation("Materials");
+                    b.Navigation("ProductCatalog");
                 });
 
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductSize", b =>
                 {
-                    b.Navigation("Sizes");
+                    b.Navigation("ProductCatalog");
                 });
 
             modelBuilder.Entity("BigOn.WebUI.Models.Entities.ProductType", b =>
                 {
-                    b.Navigation("Types");
+                    b.Navigation("ProductCatalog");
                 });
 #pragma warning restore 612, 618
         }

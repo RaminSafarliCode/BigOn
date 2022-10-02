@@ -6,7 +6,8 @@ namespace BigOn.WebUI.Models.Entities
     public class ProductMaterial : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<Product> Materials { get; set; }
+        public ICollection<ProductCatalogItem> ProductCatalog { get; set; }
+
 
     }
 }

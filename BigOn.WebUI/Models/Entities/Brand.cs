@@ -6,6 +6,6 @@ namespace BigOn.WebUI.Models.Entities
     public class Brand : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<Product> Brands { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }
