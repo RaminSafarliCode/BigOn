@@ -1,4 +1,4 @@
-using BigOn.WebUI.Models.DataContexts;
+using BigOn.Domain.Models.DataContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

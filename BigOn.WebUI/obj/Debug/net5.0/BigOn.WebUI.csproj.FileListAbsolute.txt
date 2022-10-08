@@ -242,3 +242,10 @@ C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\BigOn.WebUI.pdb
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\BigOn.WebUI.genruntimeconfig.cache
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\ref\BigOn.WebUI.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\BigOn.WebUI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Https.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\BigOn.Domain.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\BigOn.Domain.pdb

@@ -14,13 +14,13 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 2 "C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\Views\_ViewImports.cshtml"
-using BigOn.WebUI.Models.Entities;
+using BigOn.Domain.Models.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6eeb61f282628b57d10c7475a40e657182e12114", @"/Views/Home/Faq.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a3d35869bec630277114f6bec64712f10e0042e1", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"43f159a8f069cb9a5380307fc723fc51730ca1f5", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Home_Faq : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Faq>>
     #nullable disable
@@ -59,7 +59,7 @@ using BigOn.WebUI.Models.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n\r\n<!-- Breadcrumb Start -->\r\n<div class=\"breadcrumb-area ptb-50\">\r\n    <div class=\"container\">\r\n        <div class=\"breadcrumb\">\r\n            <ul>\r\n                <li><a href=\"index.html\">Home</a></li>\r\n                <li class=\"active\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6eeb61f282628b57d10c7475a40e657182e121143825", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6eeb61f282628b57d10c7475a40e657182e121143826", async() => {
                 WriteLiteral("FAQ");
             }
             );

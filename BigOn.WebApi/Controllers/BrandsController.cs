@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BigOn.Domain.Models.DataContexts;
+using BigOn.Domain.Models.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace BigOn.WebApi.Controllers
 {
@@ -7,28 +10,72 @@ namespace BigOn.WebApi.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
+        private readonly BigOnDbContext db;
+
+        public BrandsController(BigOnDbContext db)
+        {
+            this.db = db;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("from get");
+            var data = db.Brands.Where(m => m.DeletedDate == null).ToList();
+
+            if (data == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var data = db.Brands.FirstOrDefault(m => m.Id == id && m.DeletedDate == null);
+            return Ok(data);
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(Brand model)
         {
-            return Ok("from post");
+            db.Brands.Add(model);
+            db.SaveChanges();
+
+            return Ok(model);
         }
 
-        [HttpPut]
-        public IActionResult Edit()
+        [HttpPut("{id}")]
+        public IActionResult Edit(int id, [FromBody]Brand model)
         {
-            return Ok("from put");
+            var entity = db.Brands.FirstOrDefault(m => m.Id == id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            entity.Name = model.Name;
+            db.SaveChanges();
+
+            return Ok(model);
         }
 
-        [HttpDelete]
-        public IActionResult Remove()
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
         {
-            return Ok("from delete");
+            var entity = db.Brands.FirstOrDefault(m => m.Id == id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            db.Brands.Remove(entity);
+            db.SaveChanges();
+
+            return NoContent();
         }
     }
 }

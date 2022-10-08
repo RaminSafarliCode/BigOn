@@ -14,20 +14,20 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 4 "C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\Areas\Admin\Views\_ViewImports.cshtml"
-using BigOn.WebUI.AppCode.Extensions;
+using BigOn.Domain.AppCode.Extensions;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\Areas\Admin\Views\_ViewImports.cshtml"
-using BigOn.WebUI.Models.Entities;
+using BigOn.Domain.Models.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1f834c0a64344865072965a65d564826a24ae440", @"/Areas/Admin/Views/Shared/_Sidebar.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cba59ef60cb7d338678c728e35e4b4b801280190", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9ec05c0854ecfcb9812287191a8f1d36d57c3fc1", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Admin_Views_Shared__Sidebar : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -66,7 +66,7 @@ using BigOn.WebUI.Models.Entities;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<nav class=\"pcoded-navbar\">\r\n    <div class=\"pcoded-inner-navbar main-menu\">\r\n        <div class=\"pcoded-navigatio-lavel\">Management</div>\r\n        <ul class=\"pcoded-item pcoded-left-item\">\r\n            <li>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae4406380", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae4406382", async() => {
                 WriteLiteral("\r\n                    <span class=\"pcoded-micon\">\r\n                        <i class=\"feather icon-home\"></i>\r\n                    </span>\r\n                    <span class=\"pcoded-mtext\">Homepage</span>\r\n                ");
             }
             );
@@ -94,7 +94,7 @@ using BigOn.WebUI.Models.Entities;
                 <ul class=""pcoded-submenu"">
                     <li>
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae4408464", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae4408466", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Products</span>\r\n                        ");
             }
             );
@@ -112,7 +112,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44010004", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44010006", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Brands</span>\r\n                        ");
             }
             );
@@ -130,7 +130,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44011543", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44011545", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Colors</span>\r\n                        ");
             }
             );
@@ -148,7 +148,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44013082", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44013084", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Sizes</span>\r\n                        ");
             }
             );
@@ -166,7 +166,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44014620", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44014622", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Materials</span>\r\n                        ");
             }
             );
@@ -184,7 +184,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44016162", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44016164", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Types</span>\r\n                        ");
             }
             );
@@ -214,7 +214,7 @@ using BigOn.WebUI.Models.Entities;
                 <ul class=""pcoded-submenu"">
                     <li>
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44018170", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44018172", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Pending orders</span>\r\n                        ");
             }
             );
@@ -232,7 +232,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44019717", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44019719", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Completed orders</span>\r\n                        ");
             }
             );
@@ -250,7 +250,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44021266", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44021268", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Canceled orders</span>\r\n                        ");
             }
             );
@@ -280,7 +280,7 @@ using BigOn.WebUI.Models.Entities;
                 <ul class=""pcoded-submenu"">
                     <li>
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44023276", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44023278", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Shares</span>\r\n                        ");
             }
             );
@@ -298,7 +298,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44024815", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44024817", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Deleted shares</span>\r\n                        ");
             }
             );
@@ -316,7 +316,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44026362", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44026364", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Forbidden words</span>\r\n                        ");
             }
             );
@@ -334,7 +334,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44027910", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44027912", async() => {
                 WriteLiteral("\r\n                            <span class=\"pcoded-mtext\">Comment functionalities</span>\r\n                        ");
             }
             );
@@ -352,7 +352,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <li>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44029496", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44029498", async() => {
                 WriteLiteral("\r\n                    <span class=\"pcoded-micon\">\r\n                        <i class=\"feather icon-mail\"></i>\r\n                    </span>\r\n                    <span class=\"pcoded-mtext\">Applications</span>\r\n                ");
             }
             );
@@ -370,7 +370,7 @@ using BigOn.WebUI.Models.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44031148", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f834c0a64344865072965a65d564826a24ae44031150", async() => {
                 WriteLiteral("\r\n                    <span class=\"pcoded-micon\">\r\n                        <i class=\"feather icon-help-circle\"></i>\r\n                    </span>\r\n                    <span class=\"pcoded-mtext\">FAQ</span>\r\n                ");
             }
             );
