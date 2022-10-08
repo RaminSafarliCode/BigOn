@@ -3827,3 +3827,40 @@
     </div>
 </div>
 <!-- Signup-Newsletter End -->
+@section addcss{
+    <link rel="stylesheet" href="~/libs/toastr.js/toastr.min.css" />
+}
+
+    @section addjs{
+    <script src="~/libs/toastr.js/toastr.min.js"></script>
+    <script src="~/libs/toastr.js/toastr.customize.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#newsletter-subscribe').submit(function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(e.currentTarget);
+
+                $.ajax({
+                    url: '@Url.Action("Subscribe")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if(response.error == true){
+                            toastr.error(response.message, "Ugursuz!");
+                        } else{
+                            toastr.success(response.message, "Ugurlu!");
+                        }
+                        e.currentTarget.reset();
+                    },
+                    error: function(response) {
+                        toastr.error(response.message, "Ugursuz!")
+                    }
+                })
+            })
+        })
+    </script>
+}

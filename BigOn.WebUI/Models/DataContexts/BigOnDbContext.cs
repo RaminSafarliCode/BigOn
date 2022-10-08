@@ -22,6 +22,7 @@ namespace BigOn.WebUI.Models.DataContexts
         public DbSet<Brand> Brands { get; set; }
         public DbSet<ProductCatalogItem> ProductCatalog { get; set; }
         public DbSet<Faq> Faqs { get; set; }
+        public DbSet<Subscribe> Subscribes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

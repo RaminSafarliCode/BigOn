@@ -1,0 +1,142 @@
+﻿<nav class="pcoded-navbar">
+    <div class="pcoded-inner-navbar main-menu">
+        <div class="pcoded-navigatio-lavel">Management</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a asp-controller="dashboard" asp-action="index">
+                    <span class="pcoded-micon">
+                        <i class="feather icon-home"></i>
+                    </span>
+                    <span class="pcoded-mtext">Homepage</span>
+                </a>
+            </li>
+            <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="feather icon-box"></i></span>
+                    <span class="pcoded-mtext">Product</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Brands</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="colors" asp-action="index">
+                            <span class="pcoded-mtext">Colors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="sizes" asp-action="index">
+                            <span class="pcoded-mtext">Sizes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="materials" asp-action="index">
+                            <span class="pcoded-mtext">Materials</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="types" asp-action="index">
+                            <span class="pcoded-mtext">Types</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="feather icon-credit-card"></i></span>
+                    <span class="pcoded-mtext">Orders</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Pending orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Completed orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Canceled orders</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
+                    <span class="pcoded-mtext">Form</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Shares</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Deleted shares</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Forbidden words</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="brands" asp-action="index">
+                            <span class="pcoded-mtext">Comment functionalities</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a asp-controller="ContactPosts" asp-action="index">
+                    <span class="pcoded-micon">
+                        <i class="feather icon-mail"></i>
+                    </span>
+                    <span class="pcoded-mtext">Applications</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="faqs" asp-action="index">
+                    <span class="pcoded-micon">
+                        <i class="feather icon-help-circle"></i>
+                    </span>
+                    <span class="pcoded-mtext">FAQ</span>
+                </a>
+            </li>
+        </ul>
+        <div class="pcoded-navigatio-lavel">Parameters</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="#">
+                    <span class="pcoded-micon">
+                        <i class="feather icon-users"></i>
+                        </span>
+                    <span class="pcoded-mtext">Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="pcoded-micon">
+                        <i class="feather icon-sliders"></i>
+                    </span>
+                    <span class="pcoded-mtext">Roles</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

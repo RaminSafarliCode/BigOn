@@ -3,7 +3,10 @@ using BigOn.WebUI.Models.DataContexts;
 using BigOn.WebUI.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace BigOn.WebUI.Controllers
 {
@@ -45,8 +48,9 @@ namespace BigOn.WebUI.Controllers
                 //ModelState.Clear();
                 //return View();
 
-                var response = new { 
-                    error=false,
+                var response = new
+                {
+                    error = false,
                     message = "Muracietiniz qeyde alindi. Tezlikle geri donush edilecek."
                 };
                 return Json(response);
@@ -70,10 +74,94 @@ namespace BigOn.WebUI.Controllers
             return View(data);
         }
 
-        public IActionResult Subscribe()
+        [HttpPost]
+        public IActionResult Subscribe(Subscribe model)
         {
-            configuration.SendMail("raminas@code.edu.az", "<h1>Hello World!</h1>", "Test Mail");
-            return Json("Ok");
+            if (!ModelState.IsValid)
+            {
+                string msg = ModelState.Values.First().Errors[0].ErrorMessage;
+                return Json(new
+                {
+                    error = true,
+                    message = msg
+                });
+            }
+
+            var entity = db.Subscribes.FirstOrDefault(s => s.Email.Equals(model.Email));
+
+            if (entity != null && entity.IsApproved == true)
+            {
+                return Json(new
+                {
+                    error = true,
+                    message = "Siz artiq abone olmusunuz."
+                });
+            }
+
+            if (entity == null)
+            {
+                db.Subscribes.Add(model);
+                db.SaveChanges();
+            }
+            else if (entity != null)
+            {
+                model.Id = entity.Id;
+            }
+
+            string token = $"{model.Id}-{model.Email}-{Guid.NewGuid()}".Encrypt(Program.key);
+
+            token = HttpUtility.UrlEncode(token);
+
+            string message = $"Aboneliyinizi <a href='https://localhost:44374/approve-subscribe?token={token}'>link</a> vasitesile tesdiq edin.";
+
+            configuration.SendMail("raminas@code.edu.az", message, "Subscribe Approve ticket");
+            return Json(new
+            {
+                error = false,
+                message = "Emailinize tesdiq metni gonderdik."
+            });
+        }
+
+
+        [Route("/approve-subscribe")]
+        public IActionResult SubscribeApprove(string token)
+        {
+            token = token.Decrypt(Program.key);
+
+            // ^(?<id>\d+)-(?<email>[^-]+)-(?<randomKey>.*)$
+
+            Match match = Regex.Match(token, @"^(?<id>\d+)-(?<email>[^-]+)-(?<randomKey>.*)$");
+
+            if (!match.Success)
+            {
+                //return "Token uygun deyil!";
+                ViewBag.Message = "Token uygun deyil!";
+            }
+
+            int id = Convert.ToInt32(match.Groups["id"].Value);
+            string email = match.Groups["email"].Value;
+            string randomKey = match.Groups["randomKey"].Value;
+
+            var entity = db.Subscribes.FirstOrDefault(s => s.Id == id);
+
+            if (entity == null)
+            {
+                //return "Istifadeci tapilmadi";
+                ViewBag.Message = "Istifadeci tapilmadi";
+            }
+            if (entity.IsApproved)
+            {
+                //return "Artiq tesdiq olunub";
+                ViewBag.Message = "Artiq tesdiq olunub";
+            }
+
+            ViewBag.Message = "Ugurla abone oldunuz!";
+            entity.IsApproved = true;
+            entity.ApprovedDate = DateTime.UtcNow.AddHours(4);
+            db.SaveChanges();
+
+            //return $"Id: {id} | Email: {email} | RandomKey: {randomKey}";
+            return View();
         }
     }
 }

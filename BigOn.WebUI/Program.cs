@@ -1,3 +1,4 @@
+using BigOn.WebUI.AppCode.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ namespace BigOn.WebUI
 {
     public class Program
     {
+        internal static string key = "development-p513-code-academy";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
