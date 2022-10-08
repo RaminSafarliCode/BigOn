@@ -67,7 +67,7 @@
                 <div class="form-group row">
                     <label asp-for="Answer" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
-                        <input asp-for="Answer" class="form-control" />
+                        <textarea asp-for="Answer" class="form-control" id="answer"></textarea>
                         <span asp-validation-for="Answer" class="text-danger"></span>
                     </div>
                 </div>
@@ -83,3 +83,13 @@
     <!-- Horizontal-border table end -->
 </div>
 <!-- Page-body end -->
+@section addjs{
+    <script src="~/libs/ckeditor5/ckeditor.min.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#answer'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

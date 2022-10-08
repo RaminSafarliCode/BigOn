@@ -26241,15 +26241,15 @@ body.dark #styleSelector .form-control {
 
 th.operations,
 td.operations {
-    max-width: 150px;
-    width: 150px;
-    text-align: right;
-    color: white;
+  max-width: 150px;
+  width: 150px;
+  text-align: right;
+  color: white;
 }
 
 th.operations i,
 td.operations i {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .ellipse {
