@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "IGOiAkijbZOvauKXNZN32XNcG8r4y/He5ITG2xYMIWw4FeqUPz3qML9LFn0tBE3XoVWUt1OR1nQNJEP/poGsuw==",
+  "dgSpecHash": "nRe0MImKj7zrWFxAgTE0Nn/WE2fuuBCIOTR52GdTUyuGCrC6D2s/YlCRX+USTjBALdm3BvP6rnHDXRGD3cfIbA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ramin\\Desktop\\My files\\Code Academy\\Back-End Development\\BigOn Solution\\BigOn\\BigOn.Domain\\BigOn.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ramin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\ramin\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
+    "C:\\Users\\ramin\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\ramin\\.nuget\\packages\\microsoft.aspnetcore\\2.2.0\\microsoft.aspnetcore.2.2.0.nupkg.sha512",
     "C:\\Users\\ramin\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ramin\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
