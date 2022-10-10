@@ -10,8 +10,7 @@ namespace BigOn.WebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class BrandsController : ControllerBase
-    {
-
+    { 
         private readonly IMediator mediator;
 
         public BrandsController(IMediator mediator)
@@ -26,8 +25,6 @@ namespace BigOn.WebApi.Controllers
             return Ok(response);
         }
 
-
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] BrandSingleQuery query)
         {
@@ -40,9 +37,6 @@ namespace BigOn.WebApi.Controllers
             return Ok(response);
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> Create(BrandCreateCommand command)
         {
@@ -50,10 +44,8 @@ namespace BigOn.WebApi.Controllers
             return Ok(response);
         }
 
-
-
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromBody] BrandEditCommand command)//brandi from bodyden gotureceksen
+        public async Task<IActionResult> Edit(int id, [FromBody] BrandEditCommand command)
         {
             command.Id = id;
             var response = await mediator.Send(command);
@@ -66,7 +58,6 @@ namespace BigOn.WebApi.Controllers
 
             return Ok(response);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove([FromRoute] BrandRemoveCommand command)

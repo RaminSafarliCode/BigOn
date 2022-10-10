@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BigOn.Domain.Business.BrandModule;
+using BigOn.Domain.Business.MaterialModule;
+using BigOn.Domain.Models.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BigOn.Domain.Models.DataContexts;
-using BigOn.Domain.Models.Entities;
 
 namespace BigOn.WebApi.Controllers
 {
@@ -14,95 +12,65 @@ namespace BigOn.WebApi.Controllers
     [ApiController]
     public class MaterialsController : ControllerBase
     {
-        private readonly BigOnDbContext _context;
+        private readonly IMediator mediator;
 
-        public MaterialsController(BigOnDbContext context)
+        public MaterialsController(IMediator mediator)
         {
-            _context = context;
+            this.mediator = mediator;
         }
 
-        // GET: api/Materials
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductMaterial>>> GetProductMaterials()
+        public async Task<IActionResult> Get([FromRoute] MaterialGetAllQuery query)
         {
-            return await _context.ProductMaterials.ToListAsync();
+            var response = await mediator.Send(query);
+            return Ok(response);
         }
 
-        // GET: api/Materials/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductMaterial>> GetProductMaterial(int id)
+        public async Task<IActionResult> Get([FromRoute] MaterialSingleQuery query)
         {
-            var productMaterial = await _context.ProductMaterials.FindAsync(id);
-
-            if (productMaterial == null)
+            var response = await mediator.Send(query);
+            if (response == null)
             {
                 return NotFound();
             }
 
-            return productMaterial;
+            return Ok(response);
         }
 
-        // PUT: api/Materials/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductMaterial(int id, ProductMaterial productMaterial)
-        {
-            if (id != productMaterial.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(productMaterial).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductMaterialExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Materials
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductMaterial>> PostProductMaterial(ProductMaterial productMaterial)
+        public async Task<IActionResult> Create(MaterialCreateCommand command)
         {
-            _context.ProductMaterials.Add(productMaterial);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductMaterial", new { id = productMaterial.Id }, productMaterial);
+            var response = await mediator.Send(command);
+            return Ok(response);
         }
 
-        // DELETE: api/Materials/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProductMaterial(int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] MaterialEditCommand command)
         {
-            var productMaterial = await _context.ProductMaterials.FindAsync(id);
-            if (productMaterial == null)
+            command.Id = id;
+            var response = await mediator.Send(command);
+
+            if (response == null)
             {
                 return NotFound();
             }
 
-            _context.ProductMaterials.Remove(productMaterial);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(response);
         }
 
-        private bool ProductMaterialExists(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Remove([FromRoute] MaterialRemoveCommand command)
         {
-            return _context.ProductMaterials.Any(e => e.Id == id);
+            var response = await mediator.Send(command);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

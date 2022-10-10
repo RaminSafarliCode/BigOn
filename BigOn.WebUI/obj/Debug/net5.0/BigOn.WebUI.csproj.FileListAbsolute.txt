@@ -249,3 +249,5 @@ C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\BigOn.Domain.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\BigOn.Domain.pdb
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\MediatR.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\MediatR.Contracts.dll

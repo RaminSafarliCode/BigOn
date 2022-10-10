@@ -23,7 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Business\SizeModule\" />
+    <Folder Include="Business\ColorModule\" />
+    <Folder Include="Business\CategoryModule\" />
+    <Folder Include="Business\ContactPostModule\" />
+    <Folder Include="Business\FaqModule\" />
+    <Folder Include="Business\TypeModule\" />
   </ItemGroup>
 
 </Project>

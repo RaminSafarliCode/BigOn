@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BigOn.Domain.Business.SizeModule;
+using BigOn.Domain.Models.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BigOn.Domain.Models.DataContexts;
-using BigOn.Domain.Models.Entities;
 
 namespace BigOn.WebApi.Controllers
 {
@@ -14,95 +11,65 @@ namespace BigOn.WebApi.Controllers
     [ApiController]
     public class SizesController : ControllerBase
     {
-        private readonly BigOnDbContext _context;
+        private readonly IMediator mediator;
 
-        public SizesController(BigOnDbContext context)
+        public SizesController(IMediator mediator)
         {
-            _context = context;
+            this.mediator = mediator;
         }
 
-        // GET: api/Sizes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductSize>>> GetProductSizes()
+        public async Task<IActionResult> Get([FromRoute] SizeGetAllQuery query)
         {
-            return await _context.ProductSizes.ToListAsync();
+            var response = await mediator.Send(query);
+            return Ok(response);
         }
 
-        // GET: api/Sizes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductSize>> GetProductSize(int id)
+        public async Task<IActionResult> Get([FromRoute] SizeSingleQuery query)
         {
-            var productSize = await _context.ProductSizes.FindAsync(id);
-
-            if (productSize == null)
+            var response = await mediator.Send(query);
+            if (response == null)
             {
                 return NotFound();
             }
 
-            return productSize;
+            return Ok(response);
         }
 
-        // PUT: api/Sizes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductSize(int id, ProductSize productSize)
-        {
-            if (id != productSize.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(productSize).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductSizeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Sizes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductSize>> PostProductSize(ProductSize productSize)
+        public async Task<IActionResult> Create(SizeCreateCommand command)
         {
-            _context.ProductSizes.Add(productSize);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductSize", new { id = productSize.Id }, productSize);
+            var response = await mediator.Send(command);
+            return Ok(response);
         }
 
-        // DELETE: api/Sizes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProductSize(int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] SizeEditCommand command)
         {
-            var productSize = await _context.ProductSizes.FindAsync(id);
-            if (productSize == null)
+            command.Id = id;
+            var response = await mediator.Send(command);
+
+            if (response == null)
             {
                 return NotFound();
             }
 
-            _context.ProductSizes.Remove(productSize);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(response);
         }
 
-        private bool ProductSizeExists(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Remove([FromRoute] SizeRemoveCommand command)
         {
-            return _context.ProductSizes.Any(e => e.Id == id);
+            var response = await mediator.Send(command);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }
