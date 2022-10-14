@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BigOn.Domain.Models.DataContexts;
 using BigOn.Domain.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BigOn.WebUI.Areas.Admin.Controllers
 {
@@ -21,12 +22,14 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         }
 
         // GET: Admin/Brands
+        [Authorize(Policy = "admin.brands.index")]
         public async Task<IActionResult> Index()
         {
             return View(await db.Brands.ToListAsync());
         }
 
         // GET: Admin/Brands/Details/5
+        [Authorize(Policy = "admin.brands.details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +48,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         }
 
         // GET: Admin/Brands/Create
+        [Authorize(Policy = "admin.brands.create")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +57,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         // POST: Admin/Brands/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "admin.brands.create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Id,CreatedDate,DeletedDate")] Brand brand)
@@ -67,6 +72,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         }
 
         // GET: Admin/Brands/Edit/5
+        [Authorize(Policy = "admin.brands.edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +91,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         // POST: Admin/Brands/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "admin.brands.edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Id,CreatedDate,DeletedDate")] Brand brand)
@@ -119,6 +126,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
 
 
         // POST: Admin/Brands/Delete/5
+        [Authorize(Policy = "admin.brands.remove")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
