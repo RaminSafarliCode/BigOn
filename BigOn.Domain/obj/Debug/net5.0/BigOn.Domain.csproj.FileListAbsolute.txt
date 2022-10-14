@@ -1,4 +1,6 @@
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.deps.json
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.runtimeconfig.json
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.runtimeconfig.dev.json
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.pdb
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\BigOn.Domain.csproj.AssemblyReference.cache
@@ -9,7 +11,5 @@ C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\BigOn.Domain.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\refint\BigOn.Domain.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\BigOn.Domain.pdb
-C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\ref\BigOn.Domain.dll
-C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.runtimeconfig.json
-C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\bin\Debug\net5.0\BigOn.Domain.runtimeconfig.dev.json
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\BigOn.Domain.genruntimeconfig.cache
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.Domain\obj\Debug\net5.0\ref\BigOn.Domain.dll

@@ -26271,4 +26271,39 @@ td.operations i {
   min-height: 150px;
 }
 
+.table-imaged td,
+.table-imaged th {
+  vertical-align: middle !important;
+}
+.table-imaged td.image-cell {
+  min-width: 100px;
+  max-width: 120px;
+}
+.table-imaged td > img {
+  max-width: 100%;
+  height: auto;
+  max-height: 50px;
+}
+
+.image-viewer {
+  width: 100%;
+  height: 170px;
+  min-height: 170px;
+  position: relative;
+  border: 1px solid #ccc;
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+.image-viewer:not(style)::before {
+  content: "Choose a photo";
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+}
+
 /*# sourceMappingURL=style.css.map */

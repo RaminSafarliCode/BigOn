@@ -1,9 +1,12 @@
-﻿using BigOn.Domain.Models.Entities;
+﻿using BigOn.Domain.Models.DataContexts.Configurations;
+using BigOn.Domain.Models.Entities;
+using BigOn.Domain.Models.Entities.Membership;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BigOn.Domain.Models.DataContexts
 {
-    public class BigOnDbContext : DbContext
+    public partial class BigOnDbContext : IdentityDbContext<BigOnUser, BigOnRole, int, BigOnUserClaim, BigOnUserRole, BigOnUserLogin, BigOnRoleClaim, BigOnUserToken>
     {
         public BigOnDbContext(DbContextOptions options)
             : base(options)
@@ -23,17 +26,14 @@ namespace BigOn.Domain.Models.DataContexts
         public DbSet<ProductCatalogItem> ProductCatalog { get; set; }
         public DbSet<Faq> Faqs { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<BlogPostComment> BlogPostComments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<ProductCatalogItem>(cfg =>
-            {
-                cfg.HasKey(k => new {k.ProductId, k.ProductColorId, k.ProductMaterialId, k.ProductSizeId, k.ProductTypeId});
-                cfg.Property(p=>p.Id).UseIdentityColumn(1,1);
-            });
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BigOnDbContext).Assembly);
         }
     }
 }
