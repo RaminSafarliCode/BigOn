@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace BigOn.Domain.AppCode.Extensions
 {
@@ -47,7 +48,7 @@ namespace BigOn.Domain.AppCode.Extensions
             return string.Join("", provider.ComputeHash(buffer).Select(b => b.ToString("x2"))); ;
         }
 
-        public static string Encrypt(this string value, string key)
+        public static string Encrypt(this string value, string key, bool appliedUrlEncode = false)
         {
             try
             {
@@ -71,6 +72,11 @@ namespace BigOn.Domain.AppCode.Extensions
                         var result = new byte[ms.Length];
 
                         ms.Read(result, 0, result.Length);
+
+                        if (appliedUrlEncode)
+                        {
+                            return HttpUtility.UrlEncode(Convert.ToBase64String(result));
+                        }
 
                         return Convert.ToBase64String(result);
                     }

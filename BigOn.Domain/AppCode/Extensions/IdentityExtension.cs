@@ -1,10 +1,13 @@
-﻿using BigOn.Domain.Models.DataContexts;
+﻿using BigOn.Domain.AppCode.Providers;
+using BigOn.Domain.Models.DataContexts;
 using BigOn.Domain.Models.Entities.Membership;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +27,8 @@ namespace BigOn.Domain.AppCode.Extensions
             services.AddScoped<SignInManager<BigOnUser>>();
             services.AddScoped<UserManager<BigOnUser>>();
             services.AddScoped<RoleManager<BigOnRole>>();
+
+            services.AddScoped<IClaimsTransformation, AppClaimProvider>();
 
             services.Configure<IdentityOptions>(cfg =>
             {
@@ -56,6 +61,23 @@ namespace BigOn.Domain.AppCode.Extensions
             });
 
             return services;
+        }
+
+        public static bool HasAccess(this ClaimsPrincipal principal, string policyName)
+        {
+            if (principal.IsInRole("sa"))
+            {
+                return true;
+            }
+            return principal.Claims.Any(c => c.Type.Equals(policyName) && c.Value.Equals("1"));
+        }
+
+        public static int GetCurrentUserId(this ClaimsIdentity identity)
+        {
+            return Convert.ToInt32(
+                identity.Claims.FirstOrDefault(c => 
+                c.Type.Equals(ClaimTypes.NameIdentifier)).Value
+                );
         }
     }
 }

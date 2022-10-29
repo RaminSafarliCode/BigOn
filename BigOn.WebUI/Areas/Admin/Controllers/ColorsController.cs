@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BigOn.Domain.Models.DataContexts;
 using BigOn.Domain.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BigOn.WebUI.Areas.Admin.Controllers
 {
@@ -20,12 +21,13 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             this.db = db;
         }
 
-        // GET: Admin/Colors
+        [Authorize(Policy = "admin.colors.index")]
         public async Task<IActionResult> Index()
         {
             return View(await db.ProductColors.ToListAsync());
         }
 
+        [Authorize(Policy = "admin.colors.details")]
         // GET: Admin/Colors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,13 +46,14 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             return View(productColor);
         }
 
+        [Authorize(Policy = "admin.colors.create")]
         // GET: Admin/Colors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Colors/Create
+        [Authorize(Policy = "admin.colors.create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +69,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             return View(productColor);
         }
 
-        // GET: Admin/Colors/Edit/5
+        [Authorize(Policy = "admin.colors.edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,7 +85,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             return View(productColor);
         }
 
-        // POST: Admin/Colors/Edit/5
+        [Authorize(Policy = "admin.colors.edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +120,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             return View(productColor);
         }
 
-        // POST: Admin/Colors/Delete/5
+        [Authorize(Policy = "admin.colors.delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

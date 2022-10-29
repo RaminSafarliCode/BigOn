@@ -61,9 +61,12 @@
                                 @Html.DisplayNameFor(model => model.CreatedDate)
                             </th>
                             <th class="operations">
-                                <a asp-action="Create" class="btn btn-sm btn-primary">
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                                @if (User.HasAccess("admin.brands.create"))
+                                {
+                                    <a asp-action="Create" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                }
                             </th>
                         </tr>
                     </thead>
@@ -78,15 +81,25 @@
                                     @Html.DisplayFor(modelItem => item.CreatedDate)
                                 </td>
                                 <td class="operations">
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-danger" onclick="removeEntity(@item.Id, '@item.Name')">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    @if (User.HasAccess("admin.brands.edit"))
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    }
+                                    @if (User.HasAccess("admin.brands.details"))
+                                    {
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    }
+                                    @if (User.HasAccess("admin.brands.remove"))
+                                    {
+                                        <a class="btn btn-sm btn-danger" onclick="removeEntity(@item.Id, '@item.Name')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    }
+
                                 </td>
                             </tr>
                         }
@@ -100,7 +113,7 @@
 </div>
 <!-- Page-body end -->
 @section addcss{
-    <link rel="stylesheet" href="~/libs/toastr.js/toastr.min.css" />    
+    <link rel="stylesheet" href="~/libs/toastr.js/toastr.min.css" />
 }
 
     @section addjs{
@@ -108,48 +121,52 @@
     <script src="~/libs/toastr.js/toastr.min.js"></script>
     <script src="~/libs/toastr.js/toastr.customize.js"></script>
 
-    <script class="removable">
-        function removeEntity(id, name) {
-            swal(`Are you sure you want to delete '${name}'?`, {
-                title: "Warning!",
-                text: `Are you sure you want to delete '${name}'?`,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                buttons: ["No!", "Yes!"],
-            }).then((value) => {
+    @if (User.HasAccess("admin.brands.remove"))
+    {
+        <script class="removable">
+            function removeEntity(id, name) {
+                swal(`Are you sure you want to delete '${name}'?`, {
+                    title: "Warning!",
+                    text: `Are you sure you want to delete '${name}'?`,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    buttons: ["No!", "Yes!"],
+                }).then((value) => {
 
-                if (value == true) {
+                    if (value == true) {
 
-                    let vToken = $('[name=__RequestVerificationToken]').val();
+                        let vToken = $('[name=__RequestVerificationToken]').val();
 
-                    let formData = new FormData();
-                    formData.set('__RequestVerificationToken', vToken);
-                    formData.set('id', id);
+                        let formData = new FormData();
+                        formData.set('__RequestVerificationToken', vToken);
+                        formData.set('id', id);
 
-                    $.ajax({
-                        url: `@Url.Action("Delete")`,
-                        type: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
+                        $.ajax({
+                            url: `@Url.Action("Delete")`,
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
 
-                            if (response.error) {
-                                toastr.error(response.message, "Error!");
+                                if (response.error) {
+                                    toastr.error(response.message, "Error!");
 
-                                return;
+                                    return;
+                                }
+
+                                location.reload();
+
+                            },
+                            error: function(responseError) {
+                                console.error(responseError);
                             }
+                        });
+                    }
+                });
+            }
+        </script>
 
-                            location.reload();
-
-                        },
-                        error: function(responseError) {
-                            console.error(responseError);
-                        }
-                    });
-                }
-            });
-        }
-    </script>
+    }
 }

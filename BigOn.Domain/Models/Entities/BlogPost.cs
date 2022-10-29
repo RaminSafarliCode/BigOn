@@ -15,5 +15,9 @@ namespace BigOn.Domain.Models.Entities
         public DateTime? PublishedDate { get; set; }
         public int? AuthorId { get; set; }
         public virtual ICollection<BlogPostComment> Comments { get; set; }
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<BlogPostTagItem> TagCloud { get; set; }
+
     }
 }

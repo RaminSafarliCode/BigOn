@@ -17,7 +17,6 @@ namespace BigOn.WebUI
 {
     public class Program
     {
-        internal static string key = "development-p513-code-academy";
         public static void Main(string[] args)
         {
             ReadAllPolicies();

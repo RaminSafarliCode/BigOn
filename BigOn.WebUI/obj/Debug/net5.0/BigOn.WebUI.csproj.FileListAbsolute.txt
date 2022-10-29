@@ -261,3 +261,6 @@ C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\Razor\Views\Account\Signin.cshtml.g.cs
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\obj\Debug\net5.0\Razor\Views\Blog\Index.cshtml.g.cs
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ramin\Desktop\My files\Code Academy\Back-End Development\BigOn Solution\BigOn\BigOn.WebUI\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll

@@ -28,6 +28,8 @@ namespace BigOn.Domain.Models.DataContexts
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<BlogPostComment> BlogPostComments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<BlogPostTagItem> BlogPostTagCloud { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

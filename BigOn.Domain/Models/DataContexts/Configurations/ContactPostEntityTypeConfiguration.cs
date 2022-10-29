@@ -15,6 +15,8 @@ namespace BigOn.Domain.Models.DataContexts.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasIndex(x => x.Email);
+
             builder.Property(x => x.Id)
                 .UseIdentityColumn();
 

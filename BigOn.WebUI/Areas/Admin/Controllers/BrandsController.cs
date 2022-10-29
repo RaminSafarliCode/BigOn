@@ -152,6 +152,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
             });
         }
 
+        [NonAction]
         private bool BrandExists(int id)
         {
             return db.Brands.Any(e => e.Id == id);

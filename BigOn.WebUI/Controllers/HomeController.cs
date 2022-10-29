@@ -1,4 +1,5 @@
 ﻿ using BigOn.Domain.AppCode.Extensions;
+using BigOn.Domain.AppCode.Services;
 using BigOn.Domain.Models.DataContexts;
 using BigOn.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BigOn.WebUI.Controllers
@@ -15,12 +17,14 @@ namespace BigOn.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly BigOnDbContext db;
-        private IConfiguration configuration;
+        private readonly CryptoService crypto;
+        private readonly EmailService emailService;
 
-        public HomeController(BigOnDbContext db, IConfiguration configuration)
+        public HomeController(BigOnDbContext db,  CryptoService crypto, EmailService emailService)
         {
             this.db = db;
-            this.configuration = configuration;
+            this.crypto = crypto;
+            this.emailService = emailService;
         }
         public IActionResult Index()
         {
@@ -77,8 +81,9 @@ namespace BigOn.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Subscribe(Subscribe model)
+        public async Task<IActionResult> Subscribe(Subscribe model)
         {
+
             if (!ModelState.IsValid)
             {
                 string msg = ModelState.Values.First().Errors[0].ErrorMessage;
@@ -110,13 +115,17 @@ namespace BigOn.WebUI.Controllers
                 model.Id = entity.Id;
             }
 
-            string token = $"{model.Id}-{model.Email}-{Guid.NewGuid()}".Encrypt(Program.key);
+            string token = $"{model.Id}-{model.Email}-{Guid.NewGuid()}";
+            //token = token.Encrypt(Program.key);
 
-            token = HttpUtility.UrlEncode(token);
+            token = crypto.Encrypt(token, true);
 
-            string message = $"Aboneliyinizi <a href='https://localhost:44374/approve-subscribe?token={token}'>link</a> vasitesile tesdiq edin.";
+            
+            string message = $"Aboneliyinizi <a href='https://{Request.Host}/approve-subscribe?token={token}'>link</a> vasitesile tesdiq edin.";
 
-            configuration.SendMail("raminas@code.edu.az", message, "Subscribe Approve ticket");
+            //configuration.SendMail("raminas@code.edu.az", message, "Subscribe Approve ticket");
+            await emailService.SendMailAsync(model.Email, "Subscribe Approve ticket", message);
+
             return Json(new
             {
                 error = false,
@@ -128,7 +137,8 @@ namespace BigOn.WebUI.Controllers
         [Route("/approve-subscribe")]
         public IActionResult SubscribeApprove(string token)
         {
-            token = token.Decrypt(Program.key);
+            //token = token.Decrypt(Program.key);
+            token = crypto.Decrypt(token);
 
             // ^(?<id>\d+)-(?<email>[^-]+)-(?<randomKey>.*)$
 

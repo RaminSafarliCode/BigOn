@@ -1,6 +1,8 @@
 using BigOn.Domain.AppCode.Extensions;
+using BigOn.Domain.AppCode.Services;
 using BigOn.Domain.Models.DataContexts;
 using BigOn.Domain.Models.Entities.Membership;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +37,7 @@ namespace BigOn.WebUI
                     .RequireAuthenticatedUser()
                     .Build();
 
-                cfg.Filters.Add(new AuthorizeFilter(policy));   
+                cfg.Filters.Add(new AuthorizeFilter(policy));
             });
 
             services.AddDbContext<BigOnDbContext>(cfg =>
@@ -47,21 +49,19 @@ namespace BigOn.WebUI
 
             services.AddAuthorization(cfg =>
             {
-                cfg.AddPolicy("admin.brands.index", p => {
-                    p.RequireClaim("admin.brands.index", "1");
-                });
-                cfg.AddPolicy("admin.brands.details", p => {
-                    p.RequireClaim("admin.brands.details", "1");
-                });
-                cfg.AddPolicy("admin.brands.create", p => {
-                    p.RequireClaim("admin.brands.create", "1");
-                });
-                cfg.AddPolicy("admin.brands.edit", p => {
-                    p.RequireClaim("admin.brands.edit", "1");
-                });
-                cfg.AddPolicy("admin.brands.remove", p => {
-                    p.RequireClaim("admin.brands.remove", "1");
-                });
+                foreach (var item in Extension.policies)
+                {
+                    cfg.AddPolicy(item, p =>
+                    {
+                        // p.RequireClaim(item, "1");
+
+                        p.RequireAssertion(ra =>
+                        {
+                            return ra.User.HasAccess(item);
+                        });
+                    });
+                }
+
             });
 
 
@@ -69,6 +69,23 @@ namespace BigOn.WebUI
             {
                 cfg.LowercaseUrls = true;
             });
+
+            services.Configure<CryptoServiceOptions>(cfg =>
+            {
+                configuration.GetSection("cryptography").Bind(cfg);
+            });
+            services.AddSingleton<CryptoService>();
+
+            services.Configure<EmailServiceOptions>(cfg =>
+            {
+                configuration.GetSection("emailAccount").Bind(cfg);
+            });
+            services.AddSingleton<EmailService>();
+
+
+            var asemblies = AppDomain.CurrentDomain.GetAssemblies().AsEnumerable().Where(a => a.FullName.StartsWith("BigOn."));
+
+            services.AddMediatR(asemblies.ToArray());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -91,7 +108,7 @@ namespace BigOn.WebUI
 
             app.UseEndpoints(cfg =>
             {
-                cfg.MapAreaControllerRoute("defaultAdmin", "admin" ,"admin/{controller=dashboard}/{action=index}/{id?}");
+                cfg.MapAreaControllerRoute("defaultAdmin", "admin", "admin/{controller=dashboard}/{action=index}/{id?}");
                 cfg.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
             });
         }

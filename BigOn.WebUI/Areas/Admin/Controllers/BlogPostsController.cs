@@ -18,19 +18,19 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     public class BlogPostsController : Controller
     {
-        private readonly BigOnDbContext _context;
+        private readonly BigOnDbContext db;
         private readonly IHostEnvironment env;
 
         public BlogPostsController(BigOnDbContext context, IHostEnvironment env)
         {
-            _context = context;
+            db = context;
             this.env = env;
         }
 
         // GET: Admin/BlogPosts
         public async Task<IActionResult> Index()
         {
-            var data = await _context.BlogPosts
+            var data = await db.BlogPosts
                 .Where(bp=>bp.DeletedDate == null)
                 .ToListAsync();
             return View(data);
@@ -44,7 +44,12 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var blogPost = await _context.BlogPosts
+            var blogPost = await db.BlogPosts
+                .Include(bp=>bp.Category)
+
+                .Include(bp=>bp.TagCloud)
+                .ThenInclude(bp => bp.Tag)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (blogPost == null)
             {
@@ -61,8 +66,6 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         }
 
         // POST: Admin/BlogPosts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Body")] BlogPost blogPost, IFormFile image)
@@ -85,8 +88,8 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
                 }
 
 
-                _context.Add(blogPost);
-                await _context.SaveChangesAsync();
+                db.Add(blogPost);
+                await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(blogPost);
@@ -100,7 +103,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var blogPost = await _context.BlogPosts.FindAsync(id);
+            var blogPost = await db.BlogPosts.FindAsync(id);
             if (blogPost == null)
             {
                 return NotFound();
@@ -109,8 +112,6 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         }
 
         // POST: Admin/BlogPosts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id, Title,Body")] BlogPost model, IFormFile image)
@@ -122,7 +123,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var entity = _context.BlogPosts.FirstOrDefault(bp => bp.Id == id && bp.DeletedDate == null);
+                var entity = db.BlogPosts.FirstOrDefault(bp => bp.Id == id && bp.DeletedDate == null);
 
                 if (entity == null)
                 {
@@ -154,7 +155,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
                 entity.ImagePath = model.ImagePath;
 
             end:
-                _context.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
 
             }
@@ -167,7 +168,7 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entity = await _context.BlogPosts.FirstOrDefaultAsync(bp=>bp.Id == id && bp.DeletedDate == null);
+            var entity = await db.BlogPosts.FirstOrDefaultAsync(bp=>bp.Id == id && bp.DeletedDate == null);
 
             if (entity == null)
             {
@@ -178,13 +179,13 @@ namespace BigOn.WebUI.Areas.Admin.Controllers
 
             env.ArchieveImage(entity.ImagePath);
 
-            await _context.SaveChangesAsync();
+            await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BlogPostExists(int id)
         {
-            return _context.BlogPosts.Any(e => e.Id == id);
+            return db.BlogPosts.Any(e => e.Id == id);
         }
     }
 }

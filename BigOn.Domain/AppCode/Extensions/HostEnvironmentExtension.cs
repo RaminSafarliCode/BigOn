@@ -18,7 +18,7 @@ namespace BigOn.Domain.AppCode.Extensions
             var imageActualPath = Path.Combine(env.ContentRootPath, "wwwroot", "uploads", "images", fileName);
             if (File.Exists(imageActualPath))
             {
-                var imageNewPath = Path.Combine(env.ContentRootPath, "wwwroot", "uploads", "images", $"archive-{DateTime.Now}-{fileName}");
+                var imageNewPath = Path.Combine(env.ContentRootPath, "wwwroot", "uploads", "images", $"archive-{DateTime.Now:yyyyMMddHHmmss}-{fileName}");
                 File.Move(imageActualPath, imageNewPath);
             }
         }

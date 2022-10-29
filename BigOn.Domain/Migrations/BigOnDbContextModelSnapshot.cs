@@ -32,6 +32,9 @@ namespace BigOn.Domain.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -48,6 +51,8 @@ namespace BigOn.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("BlogPosts");
                 });
@@ -84,6 +89,34 @@ namespace BigOn.Domain.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("BlogPostComments");
+                });
+
+            modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPostTagItem", b =>
+                {
+                    b.Property<int>("BlogPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("BlogPostId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BlogPostTagCloud");
                 });
 
             modelBuilder.Entity("BigOn.Domain.Models.Entities.Brand", b =>
@@ -138,6 +171,8 @@ namespace BigOn.Domain.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Answer")
@@ -154,7 +189,7 @@ namespace BigOn.Domain.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -169,6 +204,8 @@ namespace BigOn.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email");
 
                     b.ToTable("ContactPosts");
                 });
@@ -618,14 +655,49 @@ namespace BigOn.Domain.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Subscribes");
+                });
+
+            modelBuilder.Entity("BigOn.Domain.Models.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPost", b =>
+                {
+                    b.HasOne("BigOn.Domain.Models.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPostComment", b =>
@@ -643,6 +715,25 @@ namespace BigOn.Domain.Migrations
                     b.Navigation("BlogPost");
 
                     b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPostTagItem", b =>
+                {
+                    b.HasOne("BigOn.Domain.Models.Entities.BlogPost", "BlogPost")
+                        .WithMany("TagCloud")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BigOn.Domain.Models.Entities.Tag", "Tag")
+                        .WithMany("TagCloud")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("BigOn.Domain.Models.Entities.Category", b =>
@@ -773,6 +864,8 @@ namespace BigOn.Domain.Migrations
             modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPost", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("TagCloud");
                 });
 
             modelBuilder.Entity("BigOn.Domain.Models.Entities.BlogPostComment", b =>
@@ -815,6 +908,11 @@ namespace BigOn.Domain.Migrations
             modelBuilder.Entity("BigOn.Domain.Models.Entities.ProductType", b =>
                 {
                     b.Navigation("ProductCatalog");
+                });
+
+            modelBuilder.Entity("BigOn.Domain.Models.Entities.Tag", b =>
+                {
+                    b.Navigation("TagCloud");
                 });
 #pragma warning restore 612, 618
         }
